@@ -29,6 +29,20 @@ module.exports = (() => {
             const css = webdriver.By.css('#createButton');
             const el = await headless.findElement(css);
             el.click();
+        },
+        findTitle: async (headless)=>
+        {
+            const myTitle=await webdriver.By.css('#myTitle');
+            const element = await headless.findElement(myTitle)
+            const output= await element.getAttribute("id");    
+            console.log(`hello there ${myTitle}, output is ${output}`)
+            return await output
+        },
+        newColor: async (headless)=>
+        {
+            const currentColor=await (headless.findElement(webdriver.By.css('#body'))).getCssValue('background-color');
+            headless.findElement(webdriver.By.css('#backgroundColors')).click()
+            return await currentColor;
         }
     };
 })();
